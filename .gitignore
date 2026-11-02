@@ -1,0 +1,19 @@
+# Derleme dizinleri
+build/
+release/
+debug/
+
+# Qt'ye özel ayar dosyaları
+*.user
+*.user.*
+.qmake.stash
+
+# Derlenmiş C++ nesneleri ve çıktıları
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+*.so
+Makefile*
+.qtcreator/

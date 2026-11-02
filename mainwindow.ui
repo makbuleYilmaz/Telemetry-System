@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1293</width>
+    <height>774</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Ana Arka Plan */
+QMainWindow {
+    background-color: #0b1320; 
+}
+
+/* Tüm Başlıklar (QLabel) */
+QLabel {
+    color: #a9b7c6; /* Göz yormayan açık gri/mavi tonu */
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12px;
+}
+
+/* Tüm Dijital Göstergeler (QLCDNumber) */
+QLCDNumber {
+    background-color: #040812; /* Panelin içine gömülü hissi veren çok koyu renk */
+    color: #00ff00; /* Neon yeşili rakamlar */
+    border: 1px solid #1a273a; /* İncecik, şık bir çerçeve */
+    border-radius: 4px; /* Hafif yumuşatılmış köşeler */
+}
+
+/* Progress Bar Ana Hattı */
+QProgressBar {
+    border: 1px solid #1a273a;
+    background-color: #040812;
+    text-align: center;
+    color: #a9b7c6;
+}
+
+/* Progress Bar İçindeki Dolan Kısım */
+QProgressBar::chunk {
+    background-color: #00ff00; /* Neon yeşili dijital dolgu */
+    width: 8px; /* Kesik kesik askeri bar görünümü verir */
+    margin: 1px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>-13</y>
+      <width>1271</width>
+      <height>761</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>808</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnMin">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnMax">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnClose">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>20</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>123456</width>
+         <height>1234545</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget {
+    background-color: #0b1118;
+    color: #e6edf3;
+    font-family: 'Segoe UI', 'Helvetica', sans-serif;
+}
+
+/* -------------------------------------------
+   1. LOG EKRANI (TERMINAL) - BÜYÜTÜLDÜ VE MODERNLEŞTİRİLDÜ
+--------------------------------------------- */
+QPlainTextEdit {
+    background-color: rgba(5, 8, 12, 0.8); /* Daha tok bir yarı saydam siyah */
+    border: 1px solid #1c2a38;
+    border-radius: 6px;
+    color: #39ff14; /* Standart yeşil yerine daha parlak/modern neon yeşil */
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px; /* Yazılar büyütüldü (Eskisi 10px idi) */
+    padding: 10px; /* Yazıların kenarlara yapışmasını engeller */
+}
+
+/* Log ekranının kaydırma çubuğunu (Scrollbar) incelt ve modernleştir */
+QScrollBar:vertical {
+    border: none;
+    background: #0b1118;
+    width: 10px;
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+    background: #1c2a38;
+    min-height: 20px;
+    border-radius: 5px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #30363d;
+}
+
+/* -------------------------------------------
+   2. SENSÖR ETİKETLERİ VE BAŞLIKLAR
+--------------------------------------------- */
+QGroupBox {
+    border: none;
+    background: transparent;
+    margin-top: 15px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    color: #58a6ff; /* Parlak teknoloji mavisi - neon yeşil ile çok şık bir kontrast yaratır */
+    font-size: 15px; /* Eskisi 12px'di, ciddi oranda büyütüldü ve belirginleşti */
+    font-weight: bold;
+    letter-spacing: 1px; 
+    text-transform: uppercase;
+    padding-bottom: 5px; /* Yazının hemen altındaki elemanlara yapışmasını önler */
+}
+
+QLabel {
+    color: #c9d1d9; 
+    font-size: 12px; /* Yazılar 11'den 12'ye çekilip daha okunaklı yapıldı */
+    font-weight: bold;
+    background: transparent;
+}
+
+/* -------------------------------------------
+   3. DİJİTAL GÖSTERGELER (LCD) VE BARLAR
+--------------------------------------------- */
+QLCDNumber {
+    color: #00ff00; 
+    background: transparent;
+    border: none;
+}
+
+QProgressBar {
+    border: 1px solid #1c2a38;
+    border-radius: 4px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #05080c;
+    font-weight: bold;
+    font-size: 11px;
+}
+QProgressBar::chunk {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #00aa00, stop:1 #00ff00); /* Düz yeşil yerine estetik bir renk geçişi (Gradient) eklendi */
+    border-radius: 3px;
+    width: 6px;
+    margin: 1px;
+}
+
+/* -------------------------------------------
+   4. DİĞER BİLEŞENLER
+--------------------------------------------- */
+QTabWidget::pane { border: 1px solid #1c2a38; background: #0b1118; }
+QTabBar::tab {
+    background: #121c26; color: #8b949e; padding: 9px 22px;
+    border: 1px solid #1c2a38; border-bottom: none;
+    border-top-left-radius: 4px; border-top-right-radius: 4px;
+    margin-right: 3px; font-weight: bold;
+}
+QTabBar::tab:selected {
+    background: #0b1118; color: #00ff00;
+    border-top: 2px solid #00ff00; border-bottom: 2px solid #0b1118;
+}
+QTabBar::tab:hover { color: #ffffff; background: #16222f; }
+
+QTableWidget, QTableView {
+    background-color: #0d1117; color: #ffffff;
+    gridline-color: #30363d; selection-background-color: #1f6feb;
+}
+QHeaderView::section {
+    background-color: #161b22; color: #00ff00;
+    font-weight: bold; border: 1px solid #30363d; padding: 4px;
+}
+QLineEdit, QComboBox {
+    background-color: #161b22; color: #00ff00;
+    border: 1px solid #30363d; border-radius: 3px; padding: 4px;
+}
+
+/* macOS TARZI ÜST BAR BUTONLARI */
+#customTitleBar { background-color: #070B12; min-height: 30px; max-height: 30px; }
+QPushButton#btnClose { background-color: #FF5F56; border-radius: 7px; min-width: 14px; max-width: 14px; min-height: 14px; max-height: 14px; border: none; margin: 4px; }
+QPushButton#btnClose:hover { background-color: #E0443E; }
+QPushButton#btnMin { background-color: #FFBD2E; border-radius: 7px; min-width: 14px; max-width: 14px; min-height: 14px; max-height: 14px; border: none; margin: 4px; }
+QPushButton#btnMin:hover { background-color: #DDA127; }
+QPushButton#btnMax { background-color: #27C93F; border-radius: 7px; min-width: 14px; max-width: 14px; min-height: 14px; max-height: 14px; border: none; margin: 4px; }
+QPushButton#btnMax:hover { background-color: #1EA532; }
+
+/* FİLTRELE VE DİĞER STANDART BUTONLARIN TEPKİLERİ */
+QPushButton {
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 6px 15px;
+}
+QPushButton:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+}
+QPushButton:pressed {
+    background-color: #1f6feb; /* Basılınca taktiksel mavi renge döner */
+    padding-top: 8px; /* Yazıyı 2 piksel aşağı iterek &quot;çökme/basılma&quot; hissi yaratır */
+    padding-bottom: 4px;
+}</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <attribute name="title">
+         <string>Canlı Telemetri</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="2" column="0" colspan="2">
+          <widget class="QPlainTextEdit" name="plainTextEdit">
+           <property name="styleSheet">
+            <string notr="true">QPlainTextEdit {
+    background-color: #0b1320; /* Ana ekranla birebir aynı lacivert tonu */
+    color: #00ff00; /* Terminal havası için neon yeşili metin */
+    border: 1px solid #1a2639; /* Çerçeve çok sırıtmasın diye ince, koyu bir çizgi */
+    font-family: &quot;Consolas&quot;; /* Yazıların tam bir yazılım/radar ekranı gibi durması için */
+}</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QGroupBox" name="groupBoxKritik">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Kritik Sensörler</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>İrtifa (m):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLCDNumber" name="lcdIrtifa">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Rüzgar Hızı (km/s):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLCDNumber" name="lcdRuzgarHizi">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Halat Gerginliği (kg):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QProgressBar" name="barGerginlik">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <number>1000</number>
+              </property>
+              <property name="value">
+               <number>24</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Rüzgar Yönü (°):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDial" name="dialRuzgarYonu"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBoxCevresel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Çevresel Sensörler</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="2" column="1">
+             <widget class="QLCDNumber" name="lcdBasinc">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Dış Basınç (hPa):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>İç Basınç (hPa):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Sıcaklık (°C):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLCDNumber" name="lcdSicaklik">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QProgressBar" name="barIcBasinc">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="value">
+               <number>24</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>Hava Kalitesi:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLCDNumber" name="lcdHavaKalitesi">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI</family>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLCDNumber" name="lcdNem">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Nem (%):</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QGroupBox" name="groupBoxYonelim">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Yönelim Verileri</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Roll (°):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLCDNumber" name="lcdRoll">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Pitch (°):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLCDNumber" name="lcdPitch">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Yaw (°):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLCDNumber" name="lcdYaw">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Uydu Sayısı:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLCDNumber" name="lcdUyduSayisi">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QGroupBox" name="groupBoxGps">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>GPS Verileri</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>GPS Boylam:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLCDNumber" name="lcdGpsIrtifa">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>GPS Enlem:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLCDNumber" name="lcdGpsBoylam">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>GPS İrtifa (m):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLCDNumber" name="lcdGpsEnlem">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>123456</width>
+                <height>1234545</height>
+               </size>
+              </property>
+              <property name="digitCount">
+               <number>6</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::SegmentStyle::Flat</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <attribute name="title">
+         <string>Veri Tabanı ve Geçmiş</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Filtreleme Seçenekleri</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Başlangıç:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateStart">
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>Bitiş:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateEnd">
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>Sensör:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cmbSensor"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>Sıralama:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cmbSort"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnFilter">
+              <property name="text">
+               <string>Filtrele</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="title">
+            <string>Geçmiş Veri Kayıtları</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="1" column="0" rowspan="2">
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="title">
+               <string>Veri Yönetimi</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLabel" name="lblId">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>ID:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="txtDeleteId">
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnDelete">
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Kayıt Sil</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QTableWidget" name="tblHistory"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabGrafikler">
+        <attribute name="title">
+         <string>Grafikler</string>
+        </attribute>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>Uyarılar</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QTableWidget" name="tblUyarilar"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1293</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
